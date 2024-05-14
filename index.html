@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Permutação</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+    <div class="botoes">
+        <a id="trocar" href="fatoração.html"><button class="no-animation">Fatoração</button></a>
+        <a id="combinacao" href="combinação.html"><button class="no-animation">combinação</button></a>
+        <a id="arranjo" href="arranjo.html"><button class="no-animation">arranjo</button></a>
+        <a id="permutacao" href="index.html"><button class="no-animation">permutação</button></a>
+    </div>
+    <div class="content">
+            <h2 id="titulo">Calculadora de Permutação</h2>
+            <form id="permutationForm">
+                <label for="word">Digite uma palavra:</label><br>
+                <input type="text" id="word" name="word" required><br><br>
+                <button type="button" value="Calcular" onclick="calcularPermutacoes()">Calcular</button>
+            </form>
+            <div id="result"></div>
+            
+        </div>
+    </div>
+
+    <script>
+        function fatorate(n) {
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        function permutate(word) {
+            const lettersSet = new Set(word);
+            const lettersRepetitionDict = {};
+
+            for (let i = 0; i < word.length; i++) {
+                const letter = word[i];
+                if (lettersRepetitionDict.hasOwnProperty(letter)) {
+                    lettersRepetitionDict[letter]++;
+                } else {
+                    lettersRepetitionDict[letter] = 1;
+                }
+            }
+
+            let numberOfLetters = lettersSet.size;
+            let k = 1;
+
+            for (const value of Object.values(lettersRepetitionDict)) {
+                k *= fatorate(value);
+            }
+
+            const n = fatorate(word.length);
+            const permutationResult = Math.floor(n / k);
+
+            return permutationResult;
+        }
+
+        function calcularPermutacoes() {
+            const word = document.getElementById("word").value;
+            const result = permutate(word);
+            document.getElementById("result").innerHTML = `"${word}" pode ser organizada de ${result} formas diferentes.`;
+        }
+    </script>
+</body>
+</html>

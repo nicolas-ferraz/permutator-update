@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Combinação</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+    <div class="botoes">
+        <a id="trocar" href="fatoração.html"><button class="no-animation">Fatoração</button></a>
+        <a id="combinacao" href="combinação.html"><button class="no-animation">combinação</button></a>
+        <a id="arranjo" href="arranjo.html"><button class="no-animation">arranjo</button></a>
+        <a id="permutacao" href="index.html"><button class="no-animation">permutação</button></a>
+    </div>
+    <div class="content">
+            <h2 id="titulo">Calculadora de Combinação simples</h2>
+            <form id="permutationForm">
+                <label for="word">insira um valor para N:</label><br>
+                <input type="text" id="n" name="n" required><br><br>
+                <label for="word">insira um valor para K:</label><br>
+                <input type="text" id="k" name="k" required><br><br>
+                <button id="calcularbtn" type="button" value="Calcular" onclick="calcularPermutacoes()">Calcular</button>
+            </form>
+            <div id="result"></div>
+            
+        </div>
+    </div>
+
+    <script>
+        function factorial(num) {
+            if (num === 0 || num === 1)
+                return 1;
+            for (let i = num - 1; i >= 1; i--) {
+                num *= i;
+            }
+            return num;
+        }
+
+        function combine(n, k){
+            return factorial(n) / (factorial(k) * factorial(n - k));
+        }
+
+        function calcularPermutacoes(){
+            const n = parseInt(document.getElementById("n").value);
+            const k = parseInt(document.getElementById("k").value);
+
+            const result = combine(n, k);
+
+            document.getElementById("result").innerHTML=`O resultado é: ${result}`;
+        }
+    </script>
+</body>
+</html>
